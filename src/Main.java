@@ -26,7 +26,7 @@ public class Main {
 		
 		CurvePoint stall = points.get(0);
 		double K1 = stall.getTorque() / stall.getCurrent();
-		System.out.println("K = " + K1 + " (stall point)");
+		//System.out.println("Kt = " + K1 + " (stall point)");
 		// Ki - torque = bw
 		double w2 = 0;
 		double i2 = 0;
@@ -52,8 +52,8 @@ public class Main {
 			Ki_T_w += ((K1 * point.getCurrent()) - point.getTorque()) * point.getOmega();
 		}
 		double b1 = Ki_T_w / w2;
-		System.out.println("B = " + b1 + " (linear regression given K at stall)");
-		System.out.println();
+		//System.out.println("B = " + b1 + " (linear regression given K at stall)");
+		//System.out.println();
 		
 		double[] Kb = EquationSolver.solve(
 			new double[][] {
@@ -63,9 +63,6 @@ public class Main {
 		);
 		double K2 = Kb[0];
 		double b2 = -Kb[1];
-		System.out.println("K = " + K2 + " (multilinear regression without friction)");
-		System.out.println("b = " + b2 + " (multilinear regression without friction)");
-		System.out.println();
 		
 		i2 -= Math.pow(stall.getCurrent(), 2);
 		ti -= stall.getTorque() * stall.getCurrent();
@@ -82,12 +79,12 @@ public class Main {
 		double K3 = KbF[0];
 		double b3 = -KbF[1];
 		double F3 = -KbF[2];
-		System.out.println("K = " + K3 + " (multilinear regression with kinetic friction)");
-		System.out.println("b = " + b3 + " (multilinear regression with kinetic friction)");
-		System.out.println("T_F = " + F3 + " (multilinear regression with kinetic friction)");
+		//System.out.println("Kt = " + K3 + " (multilinear regression with kinetic friction)");
+		//System.out.println("b = " + b3 + " (multilinear regression with kinetic friction)");
+		//System.out.println("T_F = " + F3 + " (multilinear regression with kinetic friction)");
 		// notice T_F is even in the wrong direction. Clearly this isn't a good model, especially
 		// given the high amount of torque from friction. Motor curves are done with low friction
-		System.out.println();
+		//System.out.println();
 		
 		double[] KR = EquationSolver.solve(
 			new double[][] {
@@ -97,7 +94,12 @@ public class Main {
 		);
 		double Kw1 = KR[0];
 		double R1 = KR[1];
-		System.out.println("K = " + Kw1 + " multilinear regression with resistance");
+
+		
+		
+		System.out.println("b = " + b2 + " (multilinear regression without friction)");
 		System.out.println("R = " + R1 + " multilinear regression with resistance");
+		System.out.println("Kt = " + K2 + " (multilinear regression without friction)");
+		System.out.println("Kw = " + Kw1 + " multilinear regression with resistance");
 	}
 }
