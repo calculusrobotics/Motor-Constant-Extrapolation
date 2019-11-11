@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class Main {
-	public static void read(File file, boolean last) throws IOException {
+	public static void readCurve(File file, boolean last) throws IOException {
 		String motorName = file.getName().replace(".txt", "");
 		
 		Path path = Paths.get(file.getPath());
@@ -55,7 +55,7 @@ public class Main {
 		File[] files = folder.listFiles();
 
 		for (int i = 0; i < files.length; i++) {
-			read(files[i], i == files.length - 1);
+			readCurve(files[i], i == files.length - 1);
 		}
 	}
 }
