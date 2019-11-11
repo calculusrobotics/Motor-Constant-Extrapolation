@@ -1,8 +1,11 @@
 
 public class EquationSolver {
-	public static double[] solve(double[][] m, double[] res) {
+	public static Vector solve(double[][] m, double[] res) {
 		Matrix mat = new Matrix(m);
-		double det = mat.getDeterminant();
+		Vector vec = new Vector(res);
+		
+		return mat.inv(vec);
+		/*double det = mat.getDeterminant();
 		
 		if (res.length == 1) {
 			return new double[] {res[0] / det};
@@ -41,6 +44,6 @@ public class EquationSolver {
 			};
 		}
 		
-		return new double[] {};
+		return new double[] {};*/
 	}
 }
